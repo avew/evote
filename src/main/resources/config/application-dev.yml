@@ -68,6 +68,9 @@ spring:
       mail.smtp.starttls.enable: true
   thymeleaf:
     cache: false
+  security:
+    filter:
+      order: 3
 
 
 evote:

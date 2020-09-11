@@ -2,7 +2,7 @@ CREATE TABLE user
 (
     id                 varchar(255) NOT NULL,
     login              varchar(50)  NOT NULL,
-    password_hash      varchar(200)           DEFAULT NULL,
+    password_hash      varchar(200)          DEFAULT NULL,
     first_name         varchar(50)           DEFAULT NULL,
     last_name          varchar(50)           DEFAULT NULL,
     email              varchar(100)          DEFAULT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE user
     activated          bit(1)       NOT NULL,
     lang_key           varchar(5)            DEFAULT NULL,
     activation_key     varchar(20)           DEFAULT NULL,
-    reset_key          varchar(100)           DEFAULT NULL,
+    reset_key          varchar(100)          DEFAULT NULL,
     created_by         varchar(50)  NOT NULL,
     created_date       timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     reset_date         timestamp    NULL     DEFAULT NULL,
