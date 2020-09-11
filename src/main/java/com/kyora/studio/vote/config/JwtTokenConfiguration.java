@@ -19,6 +19,7 @@ public class JwtTokenConfiguration implements TokenEnhancer {
 
         Map<String, Object> additionalInfo = new HashMap<>();
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
+
         return accessToken;
     }
 }

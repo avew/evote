@@ -1,7 +1,7 @@
 logging:
   level:
     ROOT: ${logback.loglevel:DEBUG}
-    com.pajakku.eppt: ${logback.loglevel:DEBUG}
+    com.kyora.studio.vote: ${logback.loglevel:DEBUG}
 management:
   endpoints:
     web:
@@ -58,10 +58,10 @@ spring:
     hibernate:
       ddl-auto: none
   mail:
-    host: mail.pajakku.com
-    port: 587
-    username: no-reply@pajakku.com
-    password: mpkp45t!
+    host:
+    port:
+    username:
+    password:
     protocol: smtp
     properties:
       mail.smtp.auth: true
@@ -81,7 +81,7 @@ evote:
       time-to-live-seconds: 3600
       backup-count: 1
   mail: # specific JHipster mail property, for standard properties see MailProperties
-    from: no-reply@pajakku.com
+    from: no-reply@example.com
     base-url: http://127.0.0.1:3000
   metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
     jmx.enabled: true
@@ -89,7 +89,7 @@ evote:
       enabled: false
       host: localhost
       port: 2003
-      prefix: eppt
+      prefix: eVote
     prometheus: # Use the "prometheus" Maven profile to have the Prometheus dependencies
       enabled: false
       endpoint: /prometheusMetrics

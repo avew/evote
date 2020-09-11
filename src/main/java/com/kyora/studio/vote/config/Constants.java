@@ -11,7 +11,7 @@ public final class Constants {
 
     public interface OAUTH_CONSTANTS {
         String DEFAULT_CLIENT_ID = "abbeb89a-2c00-4c17-b276-008800ed2be7";
-        String RESOURCE_IDS_EPPT = "eppt";
+        String RESOURCE_IDS = "eVote";
         String GRANT_CLIENT_CREDENTIALS = "client_credentials";
         String AUTHORITIES_ROLE_USER = "ROLE_USER";
         int ACCESS_TOKEN_VALIDITY = 86400;

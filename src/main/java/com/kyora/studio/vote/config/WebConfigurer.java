@@ -20,16 +20,12 @@ import javax.servlet.ServletException;
 @Slf4j
 public class WebConfigurer implements ServletContextInitializer {
 
-
     private final Environment env;
 
-    private final EvoteProperties epptProperties;
-
-
-    public WebConfigurer(Environment env, EvoteProperties epptProperties) {
+    public WebConfigurer(Environment env) {
 
         this.env = env;
-        this.epptProperties = epptProperties;
+
     }
 
 

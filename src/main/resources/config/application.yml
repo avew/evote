@@ -39,4 +39,4 @@ evote:
     max-pool-size: 100
     queue-capacity: 10000
   mail:
-    from: eppt-test@pajakku.com
+    from: no-reply@example.com

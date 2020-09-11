@@ -1,7 +1,6 @@
 package com.kyora.studio.vote.security;
 
 
-import com.kyora.studio.vote.config.Constants;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,9 +38,9 @@ public final class SecurityUtils {
                 if (authentication.getPrincipal() instanceof String) {
                     userName = (String) authentication.getPrincipal();
 
-                    if (userName.equals(Constants.OAUTH_CONSTANTS.DEFAULT_CLIENT_ID)) {
-                        userName = Constants.SYSTEM_ACCOUNT;
-                    }
+//                    if (userName.equals(Constants.OAUTH_CONSTANTS.DEFAULT_CLIENT_ID)) {
+//                        userName = Constants.SYSTEM_ACCOUNT;
+//                    }
                 }
         }
         return userName;

@@ -34,14 +34,6 @@
         </encoder>
     </appender>
 
-    <!--<appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
-        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
-            <driverClass>com.mysql.jdbc.Driver</driverClass>
-            <url>jdbc:mysql://localhost:3306/epptv2?useSSL=false</url>
-            <user>root</user>
-            <password>password</password>
-        </connectionSource>
-    </appender>-->
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
