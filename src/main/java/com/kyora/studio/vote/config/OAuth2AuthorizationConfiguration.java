@@ -16,30 +16,33 @@ import org.springframework.security.oauth2.provider.code.AuthorizationCodeServic
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 
 
 @Configuration
 @EnableAuthorizationServer
 public class OAuth2AuthorizationConfiguration extends AuthorizationServerConfigurerAdapter {
 
-    private final AuthenticationManager authenticationManager;
-    private final DataSource dataSource;
-    private final UserDetailsService userDetailsService;
-
     @Autowired
-    public OAuth2AuthorizationConfiguration(AuthenticationManager authenticationManager, DataSource dataSource, UserDetailsService userDetailsService) {
-        this.authenticationManager = authenticationManager;
-        this.dataSource = dataSource;
-        this.userDetailsService = userDetailsService;
-    }
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private DataSource dataSource;
+    @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private TokenEnhancer tokenEnhancer;
 
 
     @Bean
-    public TokenEnhancer tokenEnhancer() {
-        return new CustomTokenEnhancer();
+    public JwtAccessTokenConverter accessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey("123");
+        return converter;
     }
 
     /**
@@ -64,11 +67,15 @@ public class OAuth2AuthorizationConfiguration extends AuthorizationServerConfigu
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(
+                Arrays.asList(tokenEnhancer, accessTokenConverter()));
         endpoints
                 .authenticationManager(authenticationManager)
                 .tokenStore(tokenStore())
                 .userDetailsService(userDetailsService)
-                .tokenEnhancer(tokenEnhancer());
+                .tokenEnhancer(tokenEnhancerChain);
     }
 
     @Override
@@ -90,8 +97,6 @@ public class OAuth2AuthorizationConfiguration extends AuthorizationServerConfigu
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setSupportRefreshToken(true);
         tokenServices.setTokenStore(tokenStore());
-        tokenServices.setTokenEnhancer(tokenEnhancer());
-        tokenServices.setAccessTokenValiditySeconds(3600); // 1 jam
         return tokenServices;
     }
 
