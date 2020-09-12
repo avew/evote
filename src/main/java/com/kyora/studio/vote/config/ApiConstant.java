@@ -7,4 +7,9 @@ public class ApiConstant {
     public interface USER {
         String ROOT = "/user";
     }
+
+    public interface ACCOUNT {
+        String ROOT = "/account";
+        String ME = "/me";
+    }
 }

@@ -1,6 +1,10 @@
 package com.kyora.studio.vote.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.kyora.studio.vote.config.converter.InstantDeserializer;
+import com.kyora.studio.vote.config.converter.InstantSerializer;
 import lombok.*;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.GenericGenerator;
@@ -81,6 +85,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Builder.Default
     @Column(name = "reset_date")
+    @JsonSerialize(using = InstantSerializer.class)
+    @JsonDeserialize(using = InstantDeserializer.class)
     private Instant resetDate = null;
 
 
