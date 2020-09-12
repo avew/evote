@@ -16,9 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
-/**
- * Created by avew on 12/21/17.
- */
+
 @Import(SecurityProblemSupport.class)
 @Configuration
 @EnableResourceServer
@@ -39,39 +37,38 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                    .csrf()
-                    .disable()
-                    .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
-                    .exceptionHandling()
-                    .authenticationEntryPoint(securityProblemSupport)
-                    .accessDeniedHandler(securityProblemSupport)
+                .csrf()
+                .disable()
+                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling()
+                .authenticationEntryPoint(securityProblemSupport)
+                .accessDeniedHandler(securityProblemSupport)
                 .and()
-                    .headers()
-                    .frameOptions()
-                    .disable()
+                .headers()
+                .frameOptions()
+                .disable()
                 .and()
-                    .logout()
-                    .logoutUrl("/api/logout")
-                    .logoutSuccessHandler(ajaxLogoutSuccessHandler)
-                    .invalidateHttpSession(true)
+                .logout()
+                .logoutUrl("/api/logout")
+                .logoutSuccessHandler(ajaxLogoutSuccessHandler)
+                .invalidateHttpSession(true)
                 .and()
-                    .authorizeRequests()
-                    .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                    .antMatchers("/api/authenticate").permitAll()
-                    .antMatchers("/api/account/reset_password/**").permitAll()
-                    .antMatchers("/api/profile-info").permitAll()
-                    .antMatchers("/api/log/**/stream").permitAll()
-                    .antMatchers("/api/log/**/foldering/stream").permitAll()
-                    .antMatchers("/api/**").authenticated()
-                    .antMatchers("/management/info").permitAll()
-                    .antMatchers("/management/health").permitAll()
-                    .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                    .antMatchers("/v2/api-docs/**").permitAll()
-                    .antMatchers("/swagger-resources/configuration/ui").permitAll()
-                    .antMatchers("/swagger-ui/index.html").hasAuthority(AuthoritiesConstants.ADMIN)
+                .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers("/api/authenticate").permitAll()
+                .antMatchers("/api/account/reset_password/**").permitAll()
+                .antMatchers("/api/profile-info").permitAll()
+                .antMatchers("/api/**").authenticated()
+                .antMatchers("/management/info").permitAll()
+                .antMatchers("/management/health").permitAll()
+                .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
+                .antMatchers("/v2/api-docs/**").permitAll()
+                .antMatchers("/swagger-resources/configuration/ui").permitAll()
+                .antMatchers("/swagger-ui/index.html").permitAll()
+                .antMatchers("swagger-ui.htmld").permitAll()
                 .and()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
 

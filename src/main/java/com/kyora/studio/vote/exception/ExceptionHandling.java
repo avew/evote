@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.transaction.TransactionException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,8 +24,7 @@ import org.zalando.problem.spring.web.advice.security.SecurityAdviceTrait;
 import javax.validation.ConstraintViolationException;
 import java.net.URI;
 
-import static com.kyora.studio.vote.exception.ErrorConstants.NOT_FOUND_TYPE;
-import static com.kyora.studio.vote.exception.ErrorConstants.PROBLEM_BASE_URL;
+import static com.kyora.studio.vote.exception.ErrorConstants.*;
 
 
 @ControllerAdvice
@@ -61,9 +61,14 @@ public class ExceptionHandling implements ProblemHandling, SecurityAdviceTrait {
 
     @ExceptionHandler
     public ResponseEntity<Problem> handleInternalAuthenticationServiceResult(final InternalAuthenticationServiceException exception,
-                                                     final NativeWebRequest request) {
-
+                                                                             final NativeWebRequest request) {
         return create(Status.NOT_FOUND, exception, request, NOT_FOUND_TYPE);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Problem> handleOauth2Result(final OAuth2Exception exception,
+                                                            final NativeWebRequest request) {
+        return create(Status.UNAUTHORIZED, exception, request, AUTH_TYPE);
     }
 
     //EmptyResultDataAccessException

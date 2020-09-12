@@ -33,6 +33,8 @@ public class EvoteProperties {
 
     private final Registry registry = new Registry();
 
+    private final Application application = new Application();
+
     public Async getAsync() {
         return async;
     }
@@ -71,6 +73,10 @@ public class EvoteProperties {
 
     public Ribbon getRibbon() {
         return ribbon;
+    }
+
+    public Application getApplication() {
+        return application;
     }
 
 
@@ -784,6 +790,36 @@ public class EvoteProperties {
 
         public void setPassword(String password) {
             this.password = password;
+        }
+    }
+
+    public static class Application {
+        private String name = "evote";
+        private String version = "1.0.0";
+        private String timestamp = "";
+
+        public String getVersion() {
+            return version;
+        }
+
+        public void setVersion(String version) {
+            this.version = version;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(String timestamp) {
+            this.timestamp = timestamp;
         }
     }
 

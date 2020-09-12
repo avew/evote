@@ -51,6 +51,7 @@
     <logger name="com.kyora.studio.vote" level="${logback.loglevel}"/>
 
     <logger name="com.hazelcast.internal.partition" level="OFF"/>
+    <logger name="jdk.event.security" level="WARN"/>
     <logger name="javax" level="WARN"/>
     <logger name="ch.qos.logback" level="WARN"/>
     <logger name="com.codahale.metrics" level="WARN"/>

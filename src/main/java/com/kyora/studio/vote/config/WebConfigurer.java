@@ -21,11 +21,11 @@ import javax.servlet.ServletException;
 public class WebConfigurer implements ServletContextInitializer {
 
     private final Environment env;
+    private final EvoteProperties evoteProperties;
 
-    public WebConfigurer(Environment env) {
-
+    public WebConfigurer(Environment env, EvoteProperties evoteProperties) {
         this.env = env;
-
+        this.evoteProperties = evoteProperties;
     }
 
 
@@ -41,12 +41,11 @@ public class WebConfigurer implements ServletContextInitializer {
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
+        CorsConfiguration config = evoteProperties.getCors();
         if (config.getAllowedOrigins() != null && !config.getAllowedOrigins().isEmpty()) {
             log.info("Registering CORS filter");
             source.registerCorsConfiguration("/oauth/**", config);
             source.registerCorsConfiguration("/api/**", config);
-            source.registerCorsConfiguration("/ebupot/registration/**", config);
             source.registerCorsConfiguration("/management/**", config);
             source.registerCorsConfiguration("/v2/api-docs", config);
         }

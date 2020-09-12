@@ -1,0 +1,1 @@
+package com.kyora.studio.vote.web.rest.user;

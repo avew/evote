@@ -2,16 +2,6 @@ logging:
   level:
     ROOT: ${logback.loglevel:DEBUG}
     com.kyora.studio.vote: ${logback.loglevel:DEBUG}
-management:
-  endpoints:
-    web:
-      cors:
-        allow-credentials: true
-        max-age: 1800s
-        exposed-headers: X-Total-Count, filename
-        allowed-headers: "*"
-        allowed-methods: GET, PUT, POST, DELETE, OPTIONS
-        allowed-origins: "*"
 spring:
   profiles:
     active: dev
@@ -102,5 +92,12 @@ evote:
       host: localhost
       port: 5000
       queue-size: 512
+  cors:
+    allowed-origins: "*"
+    allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+    allowed-headers: "*"
+    exposed-headers: X-Total-Count, filename
+    allow-credentials: true
+    max-age: 1800
 
 

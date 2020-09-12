@@ -1,5 +1,9 @@
 package com.kyora.studio.vote.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.kyora.studio.vote.config.converter.InstantDeserializer;
+import com.kyora.studio.vote.config.converter.InstantSerializer;
 import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -31,6 +35,8 @@ public abstract class AbstractAuditingEntity implements Serializable {
 
     @CreatedDate
     @Column(name = "created_date", nullable = false, updatable = false)
+    @JsonSerialize(using = InstantSerializer.class)
+    @JsonDeserialize(using = InstantDeserializer.class)
     private Instant createdDate;
 
     @LastModifiedBy
@@ -40,6 +46,8 @@ public abstract class AbstractAuditingEntity implements Serializable {
 
     @LastModifiedDate
     @Column(name = "last_modified_date", insertable = false)
+    @JsonSerialize(using = InstantSerializer.class)
+    @JsonDeserialize(using = InstantDeserializer.class)
     private Instant lastModifiedDate;
 
     public String getCreatedBy() {

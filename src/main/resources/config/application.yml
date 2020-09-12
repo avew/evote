@@ -3,6 +3,7 @@ server:
     session:
       cookie:
         http-only: true
+    context-path: /
   port: 8092
 spring:
   application:
@@ -38,5 +39,9 @@ evote:
     core-pool-size: 4
     max-pool-size: 100
     queue-capacity: 10000
+  application:
+    name: #project.name
+    version: #project.version
+    timestamp: #timestamp
   mail:
     from: no-reply@example.com

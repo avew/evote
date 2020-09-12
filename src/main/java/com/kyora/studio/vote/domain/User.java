@@ -19,7 +19,7 @@ import java.util.Set;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
