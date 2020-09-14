@@ -1,7 +1,7 @@
 package com.kyora.studio.vote.web.rest.account;
 
 import com.kyora.studio.vote.config.ApiConstant;
-import com.kyora.studio.vote.domain.User;
+import com.kyora.studio.vote.domain.user.User;
 import com.kyora.studio.vote.service.user.UserQueryService;
 import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;

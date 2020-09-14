@@ -1,6 +1,6 @@
 package com.kyora.studio.vote.security;
 
-import com.kyora.studio.vote.domain.User;
+import com.kyora.studio.vote.domain.user.User;
 import com.kyora.studio.vote.exception.UserNotActivatedException;
 import com.kyora.studio.vote.service.user.UserQueryService;
 import lombok.RequiredArgsConstructor;

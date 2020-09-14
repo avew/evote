@@ -1,15 +1,15 @@
 package com.kyora.studio.vote.service.user;
 
-import com.kyora.studio.vote.domain.User;
-import org.springframework.transaction.annotation.Transactional;
+import com.kyora.studio.vote.domain.user.User;
+import com.kyora.studio.vote.util.BaseNonTransactional;
 
 import java.util.Optional;
 
 /**
  * Created by avew on 1/15/18.
  */
-@Transactional(readOnly = true)
-public interface UserQueryService {
+
+public interface UserQueryService extends BaseNonTransactional<User, String, UserCriteria> {
 
     Optional<User> findByLogin(String login);
 
@@ -22,7 +22,6 @@ public interface UserQueryService {
     Optional<User> getUserWithAuthoritiesByLogin();
 
     Optional<User> getUserWithAuthoritiesByLogin(String login);
-
 
 
 }

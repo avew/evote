@@ -1,10 +1,11 @@
-package com.kyora.studio.vote.domain;
+package com.kyora.studio.vote.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.kyora.studio.vote.config.converter.InstantDeserializer;
 import com.kyora.studio.vote.config.converter.InstantSerializer;
+import com.kyora.studio.vote.domain.audit.AbstractAuditingEntity;
 import lombok.*;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.GenericGenerator;

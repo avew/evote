@@ -1,4 +1,4 @@
-package com.kyora.studio.vote.domain.upload.image;
+package com.kyora.studio.vote.domain.candidate;
 
 import com.kyora.studio.vote.domain.audit.AbstractAuditingEntity;
 import lombok.*;
@@ -7,14 +7,15 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@SuppressWarnings("SpellCheckingInspection")
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "t_upload_image")
-public class UploadImage extends AbstractAuditingEntity {
+@Table(name = "t_candidate")
+public class Candidate extends AbstractAuditingEntity {
 
 
     @Id
@@ -23,24 +24,23 @@ public class UploadImage extends AbstractAuditingEntity {
     private String id;
 
     @NotNull
-    @Column(name = "category")
-    private String category;
+    @Column(name = "name")
+    private String name;
 
     @NotNull
-    @Column(name = "path")
-    private String path;
+    @Column(name = "vision")
+    private String vision;
 
     @NotNull
-    @Column(name = "filename")
-    private String filename;
+    @Column(name = "mission")
+    private String mission;
 
     @NotNull
-    @Column(name = "content_type")
-    private String contentType;
+    @Column(name = "periode")
+    private String periode;
 
-    @NotNull
-    @Column(name = "original_filename")
-    private String originalFilename;
+    @Column(name = "image_url")
+    private String imageUrl;
 
     @NotNull
     private long length;

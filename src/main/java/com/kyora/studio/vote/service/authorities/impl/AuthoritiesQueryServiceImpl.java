@@ -1,6 +1,6 @@
 package com.kyora.studio.vote.service.authorities.impl;
 
-import com.kyora.studio.vote.domain.Authority;
+import com.kyora.studio.vote.domain.user.Authority;
 import com.kyora.studio.vote.exception.AuthorityNotFoundException;
 import com.kyora.studio.vote.repository.AuthorityRepository;
 import com.kyora.studio.vote.service.authorities.AuthoritiesQueryService;

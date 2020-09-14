@@ -1,4 +1,4 @@
-package com.kyora.studio.vote.domain;
+package com.kyora.studio.vote.domain.audit;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

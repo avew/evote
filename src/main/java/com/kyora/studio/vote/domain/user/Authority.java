@@ -1,4 +1,4 @@
-package com.kyora.studio.vote.domain;
+package com.kyora.studio.vote.domain.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

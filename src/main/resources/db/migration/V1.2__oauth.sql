@@ -11,7 +11,8 @@ CREATE TABLE oauth_client_details (
   additional_information varchar(4000) DEFAULT NULL,
   autoapprove varchar(4000) DEFAULT NULL,
   PRIMARY KEY (client_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
 INSERT INTO oauth_client_details
 (client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove)
@@ -27,7 +28,8 @@ CREATE TABLE oauth_client_token (
   client_id varchar(255) DEFAULT NULL,
   KEY fk_oauth_client_token_username (user_name),
   CONSTRAINT fk_oauth_client_token_username FOREIGN KEY (user_name) REFERENCES user (login)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
 CREATE TABLE oauth_access_token (
   token_id varchar(255) DEFAULT NULL,

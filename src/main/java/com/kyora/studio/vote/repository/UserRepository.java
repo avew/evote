@@ -1,6 +1,6 @@
 package com.kyora.studio.vote.repository;
 
-import com.kyora.studio.vote.domain.User;
+import com.kyora.studio.vote.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
