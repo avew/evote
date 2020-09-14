@@ -2,6 +2,7 @@ package com.kyora.studio.vote.service.user.impl;
 
 import com.kyora.studio.vote.domain.Authority;
 import com.kyora.studio.vote.domain.User;
+import com.kyora.studio.vote.exception.UserNotFoundException;
 import com.kyora.studio.vote.exception.UsernameExistsException;
 import com.kyora.studio.vote.repository.UserRepository;
 import com.kyora.studio.vote.security.AuthoritiesConstants;
@@ -32,12 +33,14 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public User createUserWithAuthoritiesUser(UserCreateDTO dto) {
+    public User createUserWithAuthoritiesUser(UserCreateDTO dto) throws UsernameExistsException {
 
         Optional<User> findByLogin = userQueryService.findByLogin(dto.getLogin());
         if (findByLogin.isPresent()) {
             throw new UsernameExistsException(String.format("username %s is exists", dto.getLogin()));
         }
+
+//        userQueryService.findByEmail(dto.get)
 
         Set<Authority> authorities = new HashSet<>();
         authorities.add(authoritiesQueryService.findByName(AuthoritiesConstants.USER));
@@ -58,5 +61,22 @@ public class UserServiceImpl implements UserService {
         log.debug("CREATED INFORMATION USER: {}", saved);
 
         return saved;
+    }
+
+    @Override
+    public User updateUser(User userDTO) {
+        return userQueryService.findById(userDTO.getId())
+                .map(user -> {
+                    user.setFirstName(userDTO.getFirstName());
+                    user.setLastName(userDTO.getLastName());
+                    user.setEmail(userDTO.getEmail());
+                    user.setImageUrl(userDTO.getImageUrl());
+                    user.setActivated(userDTO.isActivated());
+                    user.setLangKey(userDTO.getLangKey());
+
+                    return userRepository.save(user);
+                })
+                .orElseThrow(() -> new UserNotFoundException("user not found"));
+
     }
 }

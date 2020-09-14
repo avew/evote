@@ -12,4 +12,9 @@ public class ApiConstant {
         String ROOT = "/account";
         String ME = "/me";
     }
+
+    public interface UPLOAD {
+        String ROOT = "/upload";
+        String IMAGE = "/image";
+    }
 }

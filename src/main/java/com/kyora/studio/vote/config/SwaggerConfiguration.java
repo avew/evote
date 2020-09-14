@@ -2,13 +2,14 @@ package com.kyora.studio.vote.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.internal.util.CollectionHelper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -20,19 +21,18 @@ import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger.web.ApiKeyVehicle;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.*;
-
-import static springfox.documentation.builders.PathSelectors.regex;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by avew on 12/26/17.
  */
+@SuppressWarnings("SpellCheckingInspection")
 @Configuration
 @ConditionalOnClass({ApiInfo.class, BeanValidatorPluginsConfiguration.class})
 @EnableSwagger2
@@ -51,30 +51,39 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(new ResourceHttpMessageConverter());
+    }
+
     @Bean
     public Docket apiUser() throws IOException {
         return createDocket("user", "com.kyora.studio.vote.web.rest.user");
     }
-
-
     @Bean
-    public Docket apiOauth() throws IOException {
-        String host = "localhost:8092";
-        String[] protocols = new String[]{"http", "https"};
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .groupName("oauth")
-                .host(host)
-                .protocols(new HashSet<>(Arrays.asList(protocols)))
-                .forCodeGeneration(true)
-                .directModelSubstitute(ByteBuffer.class, String.class)
-                .genericModelSubstitutes(ResponseEntity.class)
-                .select()
-                .paths(regex("/oauth" + ".*"))
-                .build()
-                .securitySchemes(Collections.singletonList(securitySchema()))
-                .securityContexts(Collections.singletonList(securityContext()));
+    public Docket apiUpload() throws IOException {
+        return createDocket("upload", "com.kyora.studio.vote.web.rest.upload");
     }
+
+
+//    @Bean
+//    public Docket apiOauth() throws IOException {
+//        String host = "localhost:8092";
+//        String[] protocols = new String[]{"http", "https"};
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .apiInfo(apiInfo())
+//                .groupName("oauth")
+//                .host(host)
+//                .protocols(new HashSet<>(Arrays.asList(protocols)))
+//                .forCodeGeneration(true)
+//                .directModelSubstitute(ByteBuffer.class, String.class)
+//                .genericModelSubstitutes(ResponseEntity.class)
+//                .select()
+//                .paths(regex("/oauth" + ".*"))
+//                .build()
+//                .securitySchemes(Collections.singletonList(securitySchema()))
+//                .securityContexts(Collections.singletonList(securityContext()));
+//    }
 
 
     private Docket createDocket(String s, String s2) throws IOException {
@@ -93,43 +102,43 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
                 .genericModelSubstitutes(ResponseEntity.class);
     }
 
-    @Bean
-    public Docket apiManagement(@Value("${spring.application.name}") String appName,
-                                @Value("${server.servlet.context-path}") String managementContextPath,
-                                @Value("${evote.application.version}") String appVersion) {
-
-        String host = "localhost:8092";
-        String[] protocols = new String[]{"http", "https"};
-
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(new ApiInfo(appName + " management API", "Management endpoints documentation",
-                        appVersion, "", ApiInfo.DEFAULT_CONTACT, "", "", new ArrayList<>()))
-                .groupName("management")
-                .host(host)
-                .protocols(new HashSet<>(Arrays.asList(protocols)))
-                .forCodeGeneration(true)
-                .directModelSubstitute(ByteBuffer.class, String.class)
-                .genericModelSubstitutes(ResponseEntity.class)
-                .select()
-                .paths(regex(managementContextPath + ".*"))
-                .build()
-                .securitySchemes(Collections.singletonList(securitySchema()))
-                .securityContexts(Collections.singletonList(securityContext()));
-    }
-
-
-    @Bean
-    public springfox.documentation.swagger.web.SecurityConfiguration security() {
-        return new springfox.documentation.swagger.web.SecurityConfiguration(
-                "test-app-client-id",
-                "test-app-client-secret",
-                "test-app-realm",
-                "test-app",
-                "apiKey",
-                ApiKeyVehicle.HEADER,
-                "api_key",
-                "," /*scope separator*/);
-    }
+//    @Bean
+//    public Docket apiManagement(@Value("${spring.application.name}") String appName,
+//                                @Value("${server.servlet.context-path}") String managementContextPath,
+//                                @Value("${evote.application.version}") String appVersion) {
+//
+//        String host = "localhost:8092";
+//        String[] protocols = new String[]{"http", "https"};
+//
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .apiInfo(new ApiInfo(appName + " management API", "Management endpoints documentation",
+//                        appVersion, "", ApiInfo.DEFAULT_CONTACT, "", "", new ArrayList<>()))
+//                .groupName("management")
+//                .host(host)
+//                .protocols(new HashSet<>(Arrays.asList(protocols)))
+//                .forCodeGeneration(true)
+//                .directModelSubstitute(ByteBuffer.class, String.class)
+//                .genericModelSubstitutes(ResponseEntity.class)
+//                .select()
+//                .paths(regex(managementContextPath + ".*"))
+//                .build()
+//                .securitySchemes(Collections.singletonList(securitySchema()))
+//                .securityContexts(Collections.singletonList(securityContext()));
+//    }
+//
+//
+//    @Bean
+//    public springfox.documentation.swagger.web.SecurityConfiguration security() {
+//        return new springfox.documentation.swagger.web.SecurityConfiguration(
+//                "test-app-client-id",
+//                "test-app-client-secret",
+//                "test-app-realm",
+//                "test-app",
+//                "apiKey",
+//                ApiKeyVehicle.HEADER,
+//                "api_key",
+//                "," /*scope separator*/);
+//    }
 
     @Bean
     public UiConfiguration uiConfig() {

@@ -16,6 +16,8 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class UserCreateDTO {
 
+    private String id;
+
     @NotBlank
     @Size(min = 1, max = 50)
     private String login;

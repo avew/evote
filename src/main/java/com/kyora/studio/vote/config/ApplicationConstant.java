@@ -23,4 +23,8 @@ public final class ApplicationConstant {
     public ApplicationConstant() {
     }
 
+    public interface DIR {
+        String IMAGE = "/image";
+    }
+
 }

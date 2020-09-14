@@ -29,10 +29,8 @@ public class UserQueryServiceImpl implements UserQueryService {
     }
 
     @Override
-    public User findById(String id) {
-        return userRepository
-                .findById(id)
-                .orElseThrow(() -> new UserNotFoundException("user not found"));
+    public Optional<User> findById(String id) {
+        return userRepository.findById(id);
     }
 
     @Override

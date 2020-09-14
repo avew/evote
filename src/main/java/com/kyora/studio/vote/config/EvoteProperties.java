@@ -35,6 +35,8 @@ public class EvoteProperties {
 
     private final Application application = new Application();
 
+    private final Path path = new Path();
+
     public Async getAsync() {
         return async;
     }
@@ -77,6 +79,10 @@ public class EvoteProperties {
 
     public Application getApplication() {
         return application;
+    }
+
+    public Path getPath() {
+        return path;
     }
 
 
@@ -823,5 +829,17 @@ public class EvoteProperties {
         }
     }
 
+    public static class Path {
+
+        private String tmp = "";
+
+        public String getTmp() {
+            return tmp;
+        }
+
+        public void setTmp(String tmp) {
+            this.tmp = tmp;
+        }
+    }
 
 }

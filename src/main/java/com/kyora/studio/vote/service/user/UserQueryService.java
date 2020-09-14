@@ -15,7 +15,7 @@ public interface UserQueryService {
 
     Optional<User> findByEmail(String email);
 
-    User findById(String id);
+    Optional<User> findById(String id);
 //
 //    Page<UserDTO> getAllManagedUsers(Pageable pageable);
 

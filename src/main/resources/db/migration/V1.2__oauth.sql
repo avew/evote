@@ -16,7 +16,7 @@ CREATE TABLE oauth_client_details (
 INSERT INTO oauth_client_details
 (client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove)
 VALUES
-	('abbeb89a-2c00-4c17-b276-008800ed2be7','eVote','{bcrypt}$2a$10$bmepgNH/ZzynpHMwH.DnMOJGovjq8invAfKyu5AhQSxMghM0JqKfe','read,write','password,refresh_token,authorization_code,implicit','','ROLE_ADMIN,ROLE_USER',100,200,'{}','true');
+	('abbeb89a-2c00-4c17-b276-008800ed2be7','eVote','{bcrypt}$2a$10$bmepgNH/ZzynpHMwH.DnMOJGovjq8invAfKyu5AhQSxMghM0JqKfe','read,write','password,refresh_token,authorization_code,implicit','','ROLE_ADMIN,ROLE_USER,ROLE_REPORTER',3600,3800,'{}','true');
 
 
 CREATE TABLE oauth_client_token (
