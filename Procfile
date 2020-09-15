@@ -1,1 +1,1 @@
-web: java -jar target/vote-0.0.1.war
+web: java $JAVA_OPTS -jar target/vote-0.0.1.war --port $PORT target/*war
