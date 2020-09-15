@@ -1,4 +1,4 @@
-package com.kyora.studio.vote.repository.candidate;
+package com.kyora.studio.vote.service.candidate;
 
 import com.kyora.studio.vote.config.query.StringFilter;
 import lombok.AllArgsConstructor;

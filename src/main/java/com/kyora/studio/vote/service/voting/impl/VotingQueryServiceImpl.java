@@ -1,9 +1,9 @@
-package com.kyora.studio.vote.service.candidate.impl;
+package com.kyora.studio.vote.service.voting.impl;
 
-import com.kyora.studio.vote.domain.candidate.Candidate;
-import com.kyora.studio.vote.service.candidate.CandidateCriteria;
-import com.kyora.studio.vote.repository.candidate.CandidateRepository;
-import com.kyora.studio.vote.service.candidate.CandidateQueryService;
+import com.kyora.studio.vote.domain.voting.Voting;
+import com.kyora.studio.vote.repository.voting.VotingRepository;
+import com.kyora.studio.vote.service.voting.VotingCriteria;
+import com.kyora.studio.vote.service.voting.VotingQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -17,39 +17,39 @@ import java.util.Optional;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class CandidateQueryServiceImpl implements CandidateQueryService {
+public class VotingQueryServiceImpl implements VotingQueryService {
 
-    private final CandidateRepository candidateRepository;
+    private final VotingRepository votingRepository;
 
     @Override
-    public Optional<Candidate> findById(String s) {
-        return candidateRepository.findById(s);
+    public Optional<Voting> findById(String s) {
+        return votingRepository.findById(s);
     }
 
     @Override
-    public Page<Candidate> findByCriteriaWithPage(CandidateCriteria criteria, Pageable pageable) {
+    public Page<Voting> findByCriteriaWithPage(VotingCriteria criteria, Pageable pageable) {
         log.debug("REQUEST FIND BY CRITERIA WITH PAGE, CRITERIA: {}, PAGEABLE: {}", criteria, pageable);
         if (criteria == null)
-            criteria = new CandidateCriteria();
-        Specification<Candidate> specification = createSpecification(criteria);
-        return candidateRepository.findAll(specification, pageable);
+            criteria = new VotingCriteria();
+        Specification<Voting> specification = createSpecification(criteria);
+        return votingRepository.findAll(specification, pageable);
     }
 
     @Override
-    public Optional<Candidate> findOneByCriteria(CandidateCriteria criteria) {
+    public Optional<Voting> findOneByCriteria(VotingCriteria criteria) {
         if (criteria == null)
-            criteria = new CandidateCriteria();
-        Specification<Candidate> specification = createSpecification(criteria);
-        return candidateRepository.findOne(specification);
+            criteria = new VotingCriteria();
+        Specification<Voting> specification = createSpecification(criteria);
+        return votingRepository.findOne(specification);
     }
 
     @Override
-    public List<Candidate> findAll() {
-        return candidateRepository.findAll();
+    public List<Voting> findAll() {
+        return votingRepository.findAll();
     }
 
-    private Specification<Candidate> createSpecification(CandidateCriteria criteria) {
-        Specification<Candidate> specification = Specification.where(null);
+    private Specification<Voting> createSpecification(VotingCriteria criteria) {
+        Specification<Voting> specification = Specification.where(null);
 
         if (criteria != null) {
 
@@ -80,5 +80,10 @@ public class CandidateQueryServiceImpl implements CandidateQueryService {
         }
 
         return specification;
+    }
+
+    @Override
+    public Optional<Voting> findByCandidateIdAndUserId(String candidateId, String userId) {
+        return votingRepository.findByCandidateIdAndUserId(candidateId, userId);
     }
 }

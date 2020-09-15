@@ -4,7 +4,7 @@ server:
       cookie:
         http-only: true
     context-path: /
-  port: 8092
+  port: ${PORT}
 spring:
   application:
     name: eVote
@@ -35,6 +35,13 @@ spring:
   mvc:
     throw-exception-if-no-handler-found: true
 evote:
+  cors:
+    allowed-origins: "*"
+    allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+    allowed-headers: "*"
+    exposed-headers: X-Total-Count, filename
+    allow-credentials: true
+    max-age: 1800
   async:
     core-pool-size: 4
     max-pool-size: 100

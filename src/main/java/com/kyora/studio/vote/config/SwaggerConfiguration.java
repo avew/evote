@@ -70,6 +70,11 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
         return createDocket("candidate", "com.kyora.studio.vote.web.rest.candidate");
     }
 
+    @Bean
+    public Docket apiVoting() {
+        return createDocket("voting", "com.kyora.studio.vote.web.rest.voting");
+    }
+
 //    @Bean
 //    public Docket apiOauth() throws IOException {
 //        String host = "localhost:8092";
