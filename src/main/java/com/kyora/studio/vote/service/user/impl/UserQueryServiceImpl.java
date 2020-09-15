@@ -1,7 +1,7 @@
 package com.kyora.studio.vote.service.user.impl;
 
 import com.kyora.studio.vote.domain.user.User;
-import com.kyora.studio.vote.repository.UserRepository;
+import com.kyora.studio.vote.repository.user.UserRepository;
 import com.kyora.studio.vote.security.SecurityUtils;
 import com.kyora.studio.vote.service.user.UserCriteria;
 import com.kyora.studio.vote.service.user.UserQueryService;

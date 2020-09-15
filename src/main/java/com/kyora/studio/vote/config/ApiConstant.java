@@ -17,4 +17,14 @@ public class ApiConstant {
         String ROOT = "/upload";
         String IMAGE = "/image";
     }
+
+    public interface CANDIDATE {
+        String ROOT = "/candidate";
+    }
+
+    public interface VOTING {
+        String ROOT = "/voting";
+    }
+
+
 }

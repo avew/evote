@@ -24,7 +24,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.List;
@@ -57,14 +56,19 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
-    public Docket apiUser() throws IOException {
+    public Docket apiUser() {
         return createDocket("user", "com.kyora.studio.vote.web.rest.user");
     }
+
     @Bean
-    public Docket apiUpload() throws IOException {
+    public Docket apiUpload() {
         return createDocket("upload", "com.kyora.studio.vote.web.rest.upload");
     }
 
+    @Bean
+    public Docket apiCandidate() {
+        return createDocket("candidate", "com.kyora.studio.vote.web.rest.candidate");
+    }
 
 //    @Bean
 //    public Docket apiOauth() throws IOException {
@@ -86,7 +90,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
 //    }
 
 
-    private Docket createDocket(String s, String s2) throws IOException {
+    private Docket createDocket(String s, String s2) {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName(s)
                 .select()
@@ -154,7 +158,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
     }
 
 
-    private ApiInfo apiInfo() throws IOException {
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("eVote")
                 .description("Rest API eVote")

@@ -2,6 +2,7 @@ package com.kyora.studio.vote.web.rest.user;
 
 import com.kyora.studio.vote.config.ApiConstant;
 import com.kyora.studio.vote.domain.user.User;
+import com.kyora.studio.vote.exception.NotFoundException;
 import com.kyora.studio.vote.exception.UsernameExistsException;
 import com.kyora.studio.vote.security.AuthoritiesConstants;
 import com.kyora.studio.vote.service.user.UserCriteria;
@@ -27,6 +28,9 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.OK;
+
+@Secured({AuthoritiesConstants.ADMIN})
 @RestController
 @RequestMapping(ApiConstant.API_V1 + ApiConstant.USER.ROOT)
 @Slf4j
@@ -37,7 +41,6 @@ public class UserResources {
     private final UserQueryService userQueryService;
 
 
-    @Secured({AuthoritiesConstants.ADMIN})
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -47,12 +50,27 @@ public class UserResources {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
+
     @PutMapping
     @Timed
     public ResponseEntity<?> updateUser(@Valid @RequestBody User user) {
         log.info("REST REQUEST TO UPDATE USER : {}", user);
         User saved = userService.updateUser(user);
         return new ResponseEntity<>(saved, HttpStatus.OK);
+    }
+
+
+    @GetMapping(
+            value = "/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<?> getById(
+            @PathVariable String id) {
+        log.debug("REST REQUEST GET BY ID: {}", id);
+        return userQueryService
+                .findById(id)
+                .map(x -> new ResponseEntity<>(x, OK))
+                .orElseThrow(() -> new NotFoundException(id, "id"));
     }
 
 

@@ -4,7 +4,7 @@ import com.kyora.studio.vote.domain.user.Authority;
 import com.kyora.studio.vote.domain.user.User;
 import com.kyora.studio.vote.exception.UserNotFoundException;
 import com.kyora.studio.vote.exception.UsernameExistsException;
-import com.kyora.studio.vote.repository.UserRepository;
+import com.kyora.studio.vote.repository.user.UserRepository;
 import com.kyora.studio.vote.security.AuthoritiesConstants;
 import com.kyora.studio.vote.service.authorities.AuthoritiesQueryService;
 import com.kyora.studio.vote.service.user.UserQueryService;

@@ -1,4 +1,4 @@
-package com.kyora.studio.vote.repository;
+package com.kyora.studio.vote.repository.user;
 
 import com.kyora.studio.vote.domain.user.User;
 import org.springframework.data.domain.Page;

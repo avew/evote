@@ -42,10 +42,4 @@ public class Candidate extends AbstractAuditingEntity {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @NotNull
-    private long length;
-
-    @NotNull
-    private String md5;
-
 }

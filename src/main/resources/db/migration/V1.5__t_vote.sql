@@ -1,6 +1,6 @@
 # noinspection SpellCheckingInspectionForFile
 
-CREATE TABLE IF NOT EXISTS t_vote
+CREATE TABLE IF NOT EXISTS t_voting
 (
     id                 varchar(37) PRIMARY KEY NOT NULL,
     candidate_id       varchar(37),
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS t_vote
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE UNIQUE INDEX idx_t_vote on t_vote (candidate_id, user_id) USING BTREE;
+CREATE UNIQUE INDEX idx_t_vote on t_voting (candidate_id, user_id) USING BTREE;
 
 
 
