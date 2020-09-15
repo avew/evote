@@ -15,10 +15,10 @@ spring:
     serialization.indent_output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://127.0.0.1:3306/eVote?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: ${DB_HOST}
     driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password:
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     hikari:
       data-source-properties:
         cachePrepStmts: true
