@@ -1,0 +1,1 @@
+web: java -jar target/vote-0.0.1.war
