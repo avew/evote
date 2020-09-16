@@ -16,16 +16,16 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     public Candidate save(Candidate dto) {
-        return null;
+        return candidateRepository.save(dto);
     }
 
     @Override
     public Candidate update(Candidate dto) {
-        return null;
+        return candidateRepository.save(dto);
     }
 
     @Override
     public void deleteById(String s) {
-
+        candidateRepository.deleteById(s);
     }
 }

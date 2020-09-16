@@ -73,6 +73,22 @@ public class UserResources {
                 .orElseThrow(() -> new NotFoundException(id, "id"));
     }
 
+    @DeleteMapping(
+            value = "/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<?> deleteById(
+            @PathVariable String id) {
+        log.debug("REST REQUEST DELETE BY ID: {}", id);
+        return userQueryService
+                .findById(id)
+                .map(x -> {
+                    userService.deleteById(x.getId());
+                    return new ResponseEntity<>(x, OK);
+                })
+                .orElseThrow(() -> new NotFoundException(id, "id"));
+    }
+
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
@@ -90,5 +106,7 @@ public class UserResources {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, ApiConstant.API_V1 + ApiConstant.USER.ROOT);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+
 
 }

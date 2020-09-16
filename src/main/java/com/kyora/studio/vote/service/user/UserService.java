@@ -11,4 +11,6 @@ public interface UserService {
     User createUserWithAuthoritiesUser(UserCreateDTO user) throws UsernameExistsException;
 
     User updateUser(User user);
+
+    void deleteById(String id);
 }

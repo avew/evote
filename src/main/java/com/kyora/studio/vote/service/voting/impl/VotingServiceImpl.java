@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 public class VotingServiceImpl implements VotingService {
+
     private final VotingRepository votingRepository;
     private final UserQueryService userQueryService;
     private final CandidateQueryService candidateQueryService;
@@ -36,6 +37,7 @@ public class VotingServiceImpl implements VotingService {
                         if (checkIsVoted) {
                             throw new VoteException("user has voted");
                         } else {
+                            //noinspection OptionalGetWithoutIsPresent
                             Candidate candidate = candidateQueryService.findById(candidateId).get();
                             Voting voting = Voting.builder().candidate(candidate).user(user).count(1).build();
                             return votingRepository.save(voting);

@@ -79,4 +79,10 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UserNotFoundException("user not found"));
 
     }
+
+    @Override
+    public void deleteById(String id) {
+        log.debug("REQ DELETE BY ID: {}", id);
+        userRepository.deleteById(id);
+    }
 }
